@@ -1,8 +1,7 @@
-This is the *Web Quiz Engine* project I made myself.
+<h1>The Web Quiz Engine Project</h1>
+This repo was created for a 'Java Backend Developer' project on Hyperskill (JetBrains Academy).<br/><br/>
+<b>About the course:</b> <a href="https://hyperskill.org/tracks/12">https://hyperskill.org/tracks/8</a><br/>
+<b>About the project:</b> <a href="https://hyperskill.org/projects/91">https://hyperskill.org/projects/33</a><br/>
+<b>Difficulty:</b> Challenging<br/><br/>
 
-
-<p>In the Internet, you can often find sites where you need to answer some questions. It can be educational sites, sites with psychological tests, job search services, or just entertaining sites like web quests. The common thing for them is the ability to answer questions (or quizzes) and then see some results. In this project, you will develop a multi-users web service for creating and solving quizzes.</p><br/><br/>Learn more at <a href="https://hyperskill.org/projects/91?utm_source=ide&utm_medium=ide&utm_campaign=ide&utm_content=project-card">https://hyperskill.org/projects/91</a>
-
-Here's the link to the project: https://hyperskill.org/projects/91
-
-Check out my profile: https://hyperskill.org/profile/368035185
+In this project, I have developed a multi-users web service for creating and solving quizzes. The service features an API with endpoints for creating users, and adding/requesting/completing/deleting quizzes. Anyone can register but only authorised users can access the other endpoints. The project uses uses Spring Boot, Spring Data, Spring Security, and Spring Crypto. For ease of testing, an H2 database is created that can be accessed by the user specified in the security configuration.
