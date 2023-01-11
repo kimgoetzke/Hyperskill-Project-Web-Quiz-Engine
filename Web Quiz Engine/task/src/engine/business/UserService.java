@@ -1,7 +1,7 @@
 package engine.business;
 
-import engine.exceptions.UserAlreadyExistsException;
-import engine.exceptions.UserNotFoundException;
+import engine.business.exceptions.UserAlreadyExistsException;
+import engine.business.exceptions.UserNotFoundException;
 import engine.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

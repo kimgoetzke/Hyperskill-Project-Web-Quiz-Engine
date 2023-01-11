@@ -1,6 +1,6 @@
 package engine.business;
 
-import engine.exceptions.*;
+import engine.business.exceptions.QuizNotFoundException;
 import engine.persistence.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.Page;
