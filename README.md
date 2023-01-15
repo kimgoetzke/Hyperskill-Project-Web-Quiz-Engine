@@ -1,6 +1,6 @@
 <h1>The Web Quiz Engine Project</h1>
 This repo was created for a 'Java Backend Developer' project on Hyperskill (JetBrains Academy).<br/><br/>
-<b>About the course:</b> <a href="https://hyperskill.org/tracks/12">https://hyperskill.org/tracks/8</a><br/>
+<b>About the course:</b> <a href="https://hyperskill.org/tracks/12">https://hyperskill.org/tracks/12</a><br/>
 <b>About the project:</b> <a href="https://hyperskill.org/projects/91">https://hyperskill.org/projects/33</a><br/>
 <b>Difficulty:</b> Challenging<br/><br/>
 
