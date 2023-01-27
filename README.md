@@ -13,6 +13,7 @@ In this project, I have developed a multi-users web service for creating and sol
 + Using Sprint Crypto to implement BCrypt encoding for passwords
 + Using Sprint Security to allow only authorised users access (except for user registration)
 + A locally stored H2 database to store quizzes
++ Processing and returning data in JSON format
 
 ## Example
 ![image](https://user-images.githubusercontent.com/120580433/213090276-f549982f-50dd-4647-8d3b-f436b5482f9c.png)
