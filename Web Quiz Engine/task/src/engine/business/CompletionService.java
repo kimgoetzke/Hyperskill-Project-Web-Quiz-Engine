@@ -1,6 +1,9 @@
 package engine.business;
 
 import engine.persistence.CompletionRepository;
+import engine.presentation.EngineController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +16,7 @@ import java.util.Arrays;
 @Service
 public class CompletionService {
     private final CompletionRepository completionRepository;
+    private final Logger LOGGER = LoggerFactory.getLogger(EngineController.class.getName());
 
     @Autowired
     public CompletionService(CompletionRepository completionRepository) {
@@ -21,7 +25,7 @@ public class CompletionService {
 
     public void add(long quizId, User user) {
         Completion completion = new Completion(quizId, LocalDateTime.now(), user);
-        System.out.println("New completion added: " + completion.toString() + ".");
+        LOGGER.info("New completion added: " + completion + ".");
         completionRepository.save(completion);
     }
 
@@ -29,7 +33,7 @@ public class CompletionService {
         Pageable paging = PageRequest.of(page, size, Sort.by("date_time").descending());
         Page<Completion> result = completionRepository.findAllByUser(user, paging);
         if(result.hasContent()) {
-            System.out.println("Returned completions: " + Arrays.toString(result.getContent().toArray()));
+            LOGGER.info("Returned completions: " + Arrays.toString(result.getContent().toArray()));
         }
         return result;
     }

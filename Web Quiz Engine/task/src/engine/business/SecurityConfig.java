@@ -22,9 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .mvcMatchers("/api/register").permitAll()
-                .mvcMatchers("/api/register").permitAll()
-                .mvcMatchers("/actuator/shutdown").permitAll()
-                .mvcMatchers("/h2-console/**").permitAll()
+                .mvcMatchers("/actuator/shutdown").permitAll() // Required for Hyperskill tests
+                .mvcMatchers("/h2-console/**").permitAll() // For testing & troubleshooting
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

@@ -2,6 +2,9 @@ package engine.business;
 
 import engine.business.exceptions.QuizNotFoundException;
 import engine.persistence.*;
+import engine.presentation.EngineController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +17,7 @@ import java.util.HashSet;
 public class QuizService {
     private final QuizRepository quizRepository;
     private final CompletionService completionService;
+    private final Logger LOGGER = LoggerFactory.getLogger(EngineController.class.getName());
 
     @Autowired
     public QuizService(QuizRepository quizRepository, CompletionService completionService) {
@@ -22,9 +26,9 @@ public class QuizService {
     }
 
     public Quiz add(Quiz quiz) {
-        System.out.println("Current count of quizzes in database: "+ count() + ".");
+        LOGGER.info("Current count of quizzes in database: "+ count() + ".");
         Quiz result = quizRepository.save(quiz);
-        System.out.println("New count of quizzes: " + count() + ". Details of added quiz below.\n" + quiz.toString());
+        LOGGER.info("New count of quizzes: " + count() + ". Details of added quiz: " + quiz);
         return result;
     }
 
@@ -44,16 +48,16 @@ public class QuizService {
             answer = new Answer();
         }
 
-        System.out.println("Retrieved answers '" + get(id).getAnswer().toString() + "' from the quiz object"
+        LOGGER.info("Retrieved answers '" + get(id).getAnswer().toString() + "' from the quiz object"
                 + " and received '" + answer.getAnswer().toString() + "' as an answer object (i.e. user input).");
 
         if (new HashSet<>(answer.getAnswer()).containsAll(get(id).getAnswer())
                 && new HashSet<>(get(id).getAnswer()).containsAll(answer.getAnswer())) {
             completionService.add(id, user);
-            System.out.println("Result: Answer is correct.");
+            LOGGER.info("Result: Answer is correct.");
             return new Response(true);
         } else {
-            System.out.println("Result: Answer is NOT correct.");
+            LOGGER.info("Result: Answer is NOT correct.");
             return new Response(false);
         }
     }
@@ -61,14 +65,14 @@ public class QuizService {
     @Transactional
     public boolean delete(long id) {
         if (quizRepository.findById(id).isPresent()) {
-            System.out.println("Quiz " + id + " is being deleted (count of quizzes: " + count() + ").");
+            LOGGER.info("Quiz " + id + " is being deleted (count of quizzes: " + count() + ").");
             Quiz quiz = quizRepository.findById(id).get();
             quiz.getUser().getQuizzes().remove(quiz);
             quizRepository.deleteById(id);
-            System.out.println("Count of remaining quizzes in database: " + count() + ".");
+            LOGGER.info("Count of remaining quizzes in database: " + count() + ".");
             return true;
         }
-        System.out.println("Quiz " + id + " not found. Request declined.");
+        LOGGER.warn("Quiz " + id + " not found. Request declined.");
         throw new QuizNotFoundException(id);
     }
 

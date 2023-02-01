@@ -15,11 +15,9 @@ public class User {
     @Email(regexp = ".+@.+\\..+", message = "A valid email address must be entered.")
     private String email;
 
-    @NotNull
+    @NotBlank
     @Size(min = 5, message = "Password must be at least 5 characters long.")
     private String password;
-
-    private String role;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval=true, fetch = FetchType.LAZY)
@@ -39,7 +37,6 @@ public class User {
     public String toString() {
         return "User: " + this.email
                 + ", password: " + this.password
-                + ", role(s): " + this.role
                 + ", linked quizzes: " + Arrays.toString(this.quizzes.toArray());
     }
 

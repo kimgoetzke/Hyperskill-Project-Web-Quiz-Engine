@@ -42,7 +42,7 @@ public class Quiz {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = true)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @JsonCreator
@@ -61,11 +61,11 @@ public class Quiz {
     @Override
     public String toString() {
         return "Title: " + this.title
-                + "\n- ID: " + this.id
-                + "\n- Text: " + this.text
-                + "\n- Options: " + this.options
-                + "\n- Answer: " + this.answer
-                + "\n- User: " + this.user.getEmail();
+                + ", id: " + this.id
+                + ", text: " + this.text
+                + ", options: " + this.options
+                + ", answer: " + this.answer
+                + ", user: " + this.user.getEmail();
     }
 
     public long getId() {

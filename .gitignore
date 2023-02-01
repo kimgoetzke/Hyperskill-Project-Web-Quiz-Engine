@@ -19,3 +19,4 @@ build
 !/Web Quiz Engine/task/src/
 !/Web Quiz Engine/task/build.gradle
 !/Web Quiz Engine/task/build.gradle.kts
+/Web Quiz Engine/task/src/resources/AlternativeSolutions.txt

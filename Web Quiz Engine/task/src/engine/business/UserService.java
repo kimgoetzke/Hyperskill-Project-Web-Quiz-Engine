@@ -3,22 +3,23 @@ package engine.business;
 import engine.business.exceptions.UserAlreadyExistsException;
 import engine.business.exceptions.UserNotFoundException;
 import engine.persistence.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
     private final UserRepository userRepository;
-
     @Autowired
     PasswordEncoder passwordEncoder;
+    private final Logger LOGGER = LoggerFactory.getLogger(UserService.class.getName());
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -27,12 +28,12 @@ public class UserService implements UserDetailsService {
 
     public boolean add(User user) {
         if (userRepository.existsById(user.getEmail())) {
-            System.out.println("User exists: " + userRepository.findById(user.getEmail()) + ".");
+            LOGGER.warn("User exists: " + userRepository.findById(user.getEmail()) + ".");
             throw new UserAlreadyExistsException(user.getEmail());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        System.out.println("Added: " + userRepository.findById(user.getEmail())
+        LOGGER.info("Added: " + userRepository.findById(user.getEmail())
                 + " - total number of users is now " + userRepository.count() + ".");
         return true;
     }
